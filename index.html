@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coffee Master 隐私政策（单机离线版）</title>
+<meta name="description" content="Coffee Master 单机离线版的隐私政策：不收集、不上传、不联网、无 AI 生成，数据仅存于你的设备。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233A2418'/%3E%3Cpath d='M14 26h26v10a13 13 0 0 1-13 13h0a13 13 0 0 1-13-13z' fill='%23FFF8ED'/%3E%3Cpath d='M40 28h5a6 6 0 0 1 0 12h-5' fill='none' stroke='%23FFF8ED' stroke-width='3'/%3E%3Cpath d='M20 15c-3 4 3 6 0 10M28 14c-3 4 3 6 0 10' fill='none' stroke='%23D9AC78' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#FFF8ED;
+  --ink-dim:#C7B4A1;
+  --ink-soft:#A89685;
+  --bg:#17100C;
+  --bg-deep:#0E0906;
+  --bg-raise:#22160F;
+  --bark:#3A2418;
+  --bronze:#D9AC78;
+  --rule:rgba(217,172,120,.22);
+  --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","STSong","SimSun",serif;
+  --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg-deep);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(180deg,#1d1309 0%,#0E0906 46%,#0E0906 100%);
+}
+.skip{position:absolute;left:-9999px;top:0;background:var(--bronze);color:#1a1109;padding:10px 16px;z-index:50}
+.skip:focus{left:12px;top:12px}
+a{color:var(--bronze);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+
+/* ---------- 页头 ---------- */
+.top{
+  border-bottom:1px solid var(--rule);
+  background:linear-gradient(180deg,#3A2418 0%,#241609 62%,#17100C 100%);
+}
+.top-inner{max-width:1180px;margin:0 auto;padding:34px 22px 0}
+.brand{display:flex;align-items:center;gap:16px}
+.brand img{width:58px;height:58px;border-radius:14px;display:block;box-shadow:0 6px 22px rgba(0,0,0,.45)}
+.brand-text{display:flex;flex-direction:column;gap:2px}
+.brand-name{font-size:15px;letter-spacing:.08em;color:var(--ink-dim)}
+.doc-title{
+  font-family:var(--serif);font-size:clamp(26px,5vw,38px);line-height:1.35;
+  margin:26px 0 10px;font-weight:600;letter-spacing:.01em;
+}
+.doc-meta{color:var(--ink-soft);font-size:14px;letter-spacing:.02em}
+.promises{
+  display:grid;grid-template-columns:repeat(3,1fr);margin:28px 0 0;
+  border-top:1px solid var(--rule);
+}
+.promise{padding:18px 0 26px;border-left:1px solid var(--rule);padding-left:20px}
+.promise:first-child{border-left:0;padding-left:0}
+.promise dt{font-family:var(--serif);font-size:20px;color:var(--bronze);margin:0 0 4px;font-weight:600}
+.promise dd{margin:0;font-size:14px;line-height:1.7;color:var(--ink-dim)}
+
+/* ---------- 布局 ---------- */
+.layout{max-width:1180px;margin:0 auto;padding:0 22px 60px;display:block}
+.toc{display:none}
+main{padding-top:34px;max-width:44rem}
+@media (min-width:1024px){
+  .layout{display:grid;grid-template-columns:minmax(0,44rem) 236px;gap:56px;align-items:start}
+  .toc{
+    display:block;position:sticky;top:22px;order:2;
+    padding:8px 0 0;margin-top:40px;border-left:1px solid var(--rule);padding-left:22px;
+  }
+  .toc-title{font-size:13px;color:var(--ink-soft);letter-spacing:.1em;margin:0 0 12px}
+  .toc nav{display:flex;flex-direction:column;gap:2px}
+  .toc a{font-size:14px;line-height:1.7;color:var(--ink-dim);padding:3px 0;border-bottom:1px solid transparent}
+  .toc a:hover{color:var(--ink);text-decoration:none}
+  .toc a.active{color:var(--bronze)}
+}
+.chapter-nav{
+  display:block;margin:26px 0 0;padding:0;overflow-x:auto;white-space:nowrap;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+.chapter-nav a{display:inline-block;font-size:14px;color:var(--ink-dim);padding:9px 12px 9px 0}
+@media (min-width:1024px){.chapter-nav{display:none}}
+
+/* ---------- 正文 ---------- */
+.lede{
+  font-size:17px;line-height:2;color:var(--ink);margin:0 0 18px;
+  padding-left:2px;
+}
+.lede + .lede{color:var(--ink-dim);font-size:16px}
+h2{
+  font-family:var(--serif);font-size:clamp(22px,3.4vw,26px);font-weight:600;
+  line-height:1.45;color:var(--ink);margin:52px 0 14px;letter-spacing:.01em;
+  padding-top:0;border-top:1px solid var(--rule);padding-top:26px;
+}
+h2 .num{color:var(--bronze);margin-right:.35em}
+h3{
+  font-family:var(--sans);font-size:16.5px;font-weight:600;color:var(--bronze);
+  margin:22px 0 8px;line-height:1.6;
+}
+p{margin:0 0 12px;text-align:justify;text-justify:inter-character}
+p.muted{color:var(--ink-dim);font-size:15.5px}
+
+/* ---------- 表格 ---------- */
+.table-wrap{overflow-x:auto;margin:10px 0 22px;border:1px solid var(--rule);border-radius:3px}
+table{width:100%;border-collapse:collapse;min-width:640px;table-layout:fixed;font-size:14.5px;line-height:1.65}
+caption{caption-side:top;text-align:left;font-size:14px;color:var(--ink-soft);padding:12px 14px 10px;letter-spacing:.02em}
+th,td{padding:11px 14px;text-align:left;vertical-align:middle;border-bottom:1px solid var(--rule);word-break:break-word}
+th{background:var(--bg-raise);color:var(--ink);font-weight:600;font-size:14px;letter-spacing:.02em;border-bottom:1px solid rgba(217,172,120,.4)}
+tbody tr:last-child td{border-bottom:0}
+td.first{color:var(--ink)}
+td.flag{color:var(--bronze);white-space:nowrap;font-weight:600}
+td.note{color:var(--ink-dim)}
+@media (max-width:760px){table{min-width:560px;font-size:13.5px}th,td{padding:9px 11px}}
+
+/* ---------- 联系与页脚 ---------- */
+.contact{
+  margin-top:26px;padding:20px 0 4px;border-top:1px solid var(--rule);
+  font-size:15.5px;line-height:1.9;
+}
+.contact dl{display:grid;grid-template-columns:5.4em 1fr;gap:6px 10px;margin:0}
+.contact dt{color:var(--ink-soft)}
+.contact dd{margin:0;color:var(--ink)}
+footer{
+  border-top:1px solid var(--rule);background:#0B0705;
+  padding:26px 22px 44px;color:var(--ink-soft);font-size:13.5px;line-height:1.9
+}
+footer .foot-inner{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between}
+.pending{color:var(--bronze)}
+
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+
+/* ---------- 打印 ---------- */
+@media print{
+  body{background:#fff;color:#111;font-size:11pt;line-height:1.7}
+  .top{background:#fff;border-bottom:1px solid #bbb}
+  .brand img{box-shadow:none}
+  .brand-name,.doc-meta,.toc,.chapter-nav{color:#444}
+  .promise dt,h2 .num,h3{color:#6b4326}
+  .table-wrap{border-color:#bbb}
+  th{background:#f1efe9;color:#111}
+  th,td{border-bottom:1px solid #ddd}
+  .lede,.lede + .lede,p{color:#111}
+  .muted,td.note,dd{color:#333}
+  a{color:#111}
+  h2{page-break-after:avoid}
+  table{page-break-inside:auto}
+  tr{page-break-inside:avoid}
+  .layout{display:block}
+  main{max-width:none}
+  footer{background:#fff;border-top:1px solid #bbb}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <img src="assets/app-icon.png" alt="Coffee Master 应用图标">
+      <div class="brand-text">
+        <span class="brand-name">Coffee Master</span>
+        <span class="doc-meta">单机离线版 · 隐私政策</span>
+      </div>
+    </div>
+    <h1 class="doc-title">Coffee Master 隐私政策</h1>
+    <div class="doc-meta">版本 V1.0　·　生效日期 2026 年 11 月 15 日　·　开发者 陈晓涛</div>
+    <dl class="promises">
+      <div class="promise"><dt>不收集</dt><dd>无账号体系，不读取设备标识、位置、通讯录与相册</dd></div>
+      <div class="promise"><dt>不上传</dt><dd>无服务器，不集成任何统计、推送、广告或崩溃上报组件</dd></div>
+      <div class="promise"><dt>不联网</dt><dd>不声明网络权限，也不含人工智能生成能力</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div class="layout">
+<main id="main">
+
+  <p class="lede">Coffee Master（以下简称“本应用”）是一款在设备本地运行的咖啡学习与冲煮辅助应用，提供课程与测验、配方与冲煮教程、引导式冲煮计时、冲煮记录与评分、咖啡豆与器具档案、冲煮参数计算以及本地备份导入导出等功能。本应用不包含人工智能生成能力，不建立任何网络连接，也不设账号体系。</p>
+  <p class="lede">按照《中华人民共和国个人信息保护法》第十七条的规定，我们以显著方式、清晰易懂的语言，向你真实、准确、完整地告知本应用处理个人信息的目的、方式、种类、保存期限，以及你行使相关权利的方式和程序。概括而言：本应用不收集、不上传、不对外提供你的任何个人信息；你在应用内创建的全部内容只保存在你自己的设备上，由你自行控制和删除。</p>
+
+  <nav class="chapter-nav" aria-label="章节">
+    <a href="#s1">一、适用范围</a><a href="#s2">二、收集与使用</a><a href="#s3">三、存储与删除</a><a href="#s4">四、权限</a><a href="#s5">五、对外提供</a><a href="#s6">六、你的权利</a><a href="#s7">七、未成年人</a><a href="#s8">八、信息安全</a><a href="#s9">九、政策更新</a><a href="#s10">十、联系我们</a>
+  </nav>
+
+  <section id="s1">
+    <h2><span class="num">一、</span>适用范围与政策定位</h2>
+    <h3>（一）适用对象</h3>
+    <p>本政策适用于 Coffee Master 应用本体及其内置的全部本地功能，适用于通过应用市场或其他渠道安装并使用本应用的全部用户。本政策所称“我们”，指本应用的开发者，即第十条所列主体；所称“你”，指本应用的使用者。</p>
+    <h3>（二）本应用的运行形态</h3>
+    <p>本应用为单机离线应用：安装包内不声明网络访问权限，运行过程中不建立与服务端的连接，不上传任何数据，不进行远程配置下发，不回传运行日志或崩溃信息。因此，本应用不具备向任何第三方传输你的信息的技术路径。</p>
+    <h3>（三）政策的告知方式</h3>
+    <p>本政策随应用安装包一并提供，并公布于应用市场的应用详情页，你可随时查阅与保存。本政策中的处理规则如有变更，我们将按第九条说明的方式告知。</p>
+  </section>
+
+  <section id="s2">
+    <h2><span class="num">二、</span>个人信息的收集与使用</h2>
+    <h3>（一）我们不收集个人信息</h3>
+    <p>本应用不收集《个人信息保护法》意义上的个人信息，也不收集任何设备信息与使用行为数据。逐类核对结果如表 1 所示。</p>
+    <div class="table-wrap">
+      <table>
+        <caption>表 1　本应用的个人信息收集情况</caption>
+        <colgroup><col style="width:44%"><col style="width:16%"><col style="width:40%"></colgroup>
+        <thead><tr><th scope="col">信息类别</th><th scope="col">是否收集</th><th scope="col">核对说明</th></tr></thead>
+        <tbody>
+          <tr><td class="first">账号与身份信息（手机号、邮箱、昵称、头像）</td><td class="flag">不收集</td><td class="note">本应用无注册、登录与账号体系</td></tr>
+          <tr><td class="first">设备标识与设备信息（IMEI、OAID、MAC 地址、设备序列号、机型与系统版本）</td><td class="flag">不收集</td><td class="note">未调用任何设备标识读取接口</td></tr>
+          <tr><td class="first">位置信息（卫星定位、基站、Wi-Fi 列表）</td><td class="flag">不收集</td><td class="note">未申请定位类权限</td></tr>
+          <tr><td class="first">通讯录、短信、通话记录、已安装应用列表</td><td class="flag">不收集</td><td class="note">未申请相关权限</td></tr>
+          <tr><td class="first">相册、相机、麦克风、剪贴板</td><td class="flag">不收集</td><td class="note">未申请相关权限，详见第四条</td></tr>
+          <tr><td class="first">生物识别信息（人脸、指纹、声纹）</td><td class="flag">不收集</td><td class="note">未调用系统生物识别接口</td></tr>
+          <tr><td class="first">网络日志、访问记录、崩溃日志、使用统计</td><td class="flag">不收集</td><td class="note">无联网能力，未集成统计与崩溃上报组件</td></tr>
+          <tr><td class="first">支付与交易信息（银行卡、订单、账单）</td><td class="flag">不收集</td><td class="note">无内购、无支付、无订阅功能</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>（二）你在本机创建的内容</h3>
+    <p>你在使用过程中主动录入或选择的内容，包括配方参数、冲煮记录与评分、咖啡豆档案、器具与水质档案、学习进度与测验结果、收藏与偏好设置，属于你在本机创建的业务数据。这类数据由你本人输入或选择，仅保存在你的设备中；本应用既不具备联网能力，也不存在接收这些数据的服务器，因此我们不会读取、获取、留存或使用这些内容。</p>
+
+    <h3>（三）不用于人工智能训练、画像与自动化决策</h3>
+    <p>本应用不包含人工智能生成、智能问答、语音助手等能力，不将你的任何数据用于模型训练、用户画像、跨应用广告推荐或自动化决策。应用内基于本机记录显示的“下一步建议”，由安装包内置的固定规则在你的设备上即时计算，结果仅呈现给你本人。</p>
+
+    <h3>（四）处理目的与合法性基础</h3>
+    <p>由于本应用不收集个人信息，不存在以“取得个人同意”或“履行合同所必需”等事由处理个人信息的情形。应用内数据的读写仅用于实现你所选择的功能本身，其范围和目的限于当次操作。</p>
+  </section>
+
+  <section id="s3">
+    <h2><span class="num">三、</span>本地数据的存储、保存期限与删除</h2>
+    <h3>（一）存储位置</h3>
+    <p>应用数据保存在本应用的私有沙箱目录内，包括应用私有文件目录与本地数据库。该目录由操作系统隔离，其他应用无法读取；我们作为开发者也无法远程访问、读取或导出这些数据。</p>
+    <h3>（二）保存期限</h3>
+    <p>依据《个人信息保护法》第十九条关于保存期限应为实现处理目的所必要的最短时间的要求，本应用的数据保存期限与功能需要一致：数据自你创建时起保存在本机，直至你主动删除、清除应用数据或卸载本应用，此后不再保留。我们不在任何位置留存副本。</p>
+    <h3>（三）删除方式</h3>
+    <p>你可以通过以下任一方式删除本机数据：在应用内对应页面逐条删除记录或档案；在系统设置中清除本应用的全部数据；直接卸载本应用。上述操作在本机即时生效，删除后无法通过本应用恢复，请在操作前自行导出备份。</p>
+    <h3>（四）备份导出与导入</h3>
+    <p>本应用提供本地备份导出功能，将你的数据生成为备份文件。导出与导入均通过系统文件选择器由你亲自指定目标位置或来源文件，应用不会自行扫描或读取你设备上的其他文件。备份文件保存在你选择的目录或存储介质中，其保管、复制与传递由你控制；如你主动将备份文件发送给他人或上传至第三方平台，该行为由你本人实施，本政策不适用于该第三方对文件的处理。</p>
+    <h3>（五）设备系统备份的说明</h3>
+    <p>你的设备可能启用系统级云备份功能（例如厂商云空间或系统云备份服务），应用数据可能随系统备份一并被上传至该服务。该行为由操作系统和你账户的备份设置决定，并非由本应用发起，我们无法访问该备份内容。你可以在系统设置的备份选项中关闭对本应用数据的备份。</p>
+  </section>
+
+  <section id="s4">
+    <h2><span class="num">四、</span>设备权限与系统能力调用</h2>
+    <h3>（一）不申请网络权限</h3>
+    <p>本应用的权限声明中不包含网络访问权限（例如 INTERNET），因此应用在技术上无法访问互联网，也无法与任何服务器、第三方服务或广告平台通信。</p>
+    <h3>（二）权限清单</h3>
+    <p>本应用申请与调用的系统权限或能力如表 2 所示，清单与应用实际声明保持一致。</p>
+    <div class="table-wrap">
+      <table>
+        <caption>表 2　权限与系统能力调用清单</caption>
+        <colgroup><col style="width:30%"><col style="width:26%"><col style="width:44%"></colgroup>
+        <thead><tr><th scope="col">权限或系统能力</th><th scope="col">是否申请</th><th scope="col">用途与触发时机</th></tr></thead>
+        <tbody>
+          <tr><td class="first">网络访问（INTERNET 等）</td><td class="flag">不申请</td><td class="note">应用不具备联网功能</td></tr>
+          <tr><td class="first">文件读写与存储</td><td class="flag">仅通过系统文件选择器</td><td class="note">仅在你主动导出或导入本地备份时，由你选择目标文件或目录</td></tr>
+          <tr><td class="first">相机、相册</td><td class="flag">不申请</td><td class="note">如你所安装的版本提供“为冲煮记录添加照片”，仅通过系统选择器读取你主动选定的单张图片，图片只保存在应用私有目录</td></tr>
+          <tr><td class="first">定位、通讯录、短信、麦克风</td><td class="flag">不申请</td><td class="note">无对应功能</td></tr>
+          <tr><td class="first">通知与后台自启动</td><td class="flag">不申请</td><td class="note">不进行消息推送与营销触达</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>（三）权限一致性</h3>
+    <p>应用市场详情页所展示的权限信息与应用清单一致。如你在使用中发现应用调用了本政策未列明的权限或能力，请通过第十条的方式联系我们，我们将在核实后更正政策文本或调整功能实现。</p>
+  </section>
+
+  <section id="s5">
+    <h2><span class="num">五、</span>对外提供、第三方组件与跨境传输</h2>
+    <h3>（一）不对外提供</h3>
+    <p>我们不会出售、共享、转让或公开披露你的任何信息。由于本应用不收集个人信息且不具备联网能力，客观上也不存在向第三方提供信息的可能。</p>
+    <h3>（二）无第三方组件</h3>
+    <p>本应用未集成第三方统计、推送、广告、崩溃监控、支付、地图、社交登录或内容分发类组件，安装包内不包含上述组件的代码与数据采集逻辑。应用内的图片、课程与配方内容均随安装包内置，运行时不从网络获取。</p>
+    <h3>（三）无跨境传输</h3>
+    <p>本应用不设服务器，不存在将个人信息传输至境外，或向境外机构、组织、个人提供个人信息的情形。</p>
+    <h3>（四）无广告与营销</h3>
+    <p>本应用不含广告位、不含开屏与插屏广告、不进行营销推送，也不基于你的行为数据进行商业推广。</p>
+  </section>
+
+  <section id="s6">
+    <h2><span class="num">六、</span>你的权利与实现方式</h2>
+    <p>依据《个人信息保护法》第四十四条至第四十七条的规定，你对个人信息的处理享有知情权与决定权，并有权查阅、复制、更正、删除。由于本应用的数据全部保存在你的设备上，上述权利均可由你在应用内直接完成，无需向我们申请。具体方式如表 3 所示。</p>
+    <div class="table-wrap">
+      <table>
+        <caption>表 3　你的权利与实现方式</caption>
+        <colgroup><col style="width:20%"><col style="width:44%"><col style="width:36%"></colgroup>
+        <thead><tr><th scope="col">权利内容</th><th scope="col">实现方式</th><th scope="col">补充说明</th></tr></thead>
+        <tbody>
+          <tr><td class="first">查阅、复制</td><td>在应用内对应页面查看；使用“导出备份”生成完整数据文件</td><td class="note">数据位于你本机，可随时复制留存</td></tr>
+          <tr><td class="first">更正、补充</td><td>在应用内编辑记录、配方与档案后保存</td><td class="note">修改即时生效</td></tr>
+          <tr><td class="first">删除</td><td>在应用内逐条删除；在系统设置中清除应用数据；卸载应用</td><td class="note">删除后应用内无法恢复</td></tr>
+          <tr><td class="first">撤回同意</td><td>不适用</td><td class="note">本应用未基于你的同意收集个人信息；如你曾导出备份并对外提供，可由你自行收回或删除该文件</td></tr>
+          <tr><td class="first">注销账号</td><td>不适用</td><td class="note">本应用无账号体系，无需注销</td></tr>
+          <tr><td class="first">要求解释说明</td><td>通过第十条所列联系方式提出</td><td class="note">我们将在收到后 15 个工作日内答复</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>如你认为本应用的处理活动损害了你的合法权益，可先通过第十条的方式与我们沟通；对答复不满意的，你也可以向网信、工信、市场监管等监管部门投诉举报。</p>
+  </section>
+
+  <section id="s7">
+    <h2><span class="num">七、</span>未成年人保护</h2>
+    <p>本应用不收集任何个人信息，因此不涉及处理不满十四周岁未成年人个人信息的情形，也不需要取得其监护人的单独同意。本应用不含社交、付费、广告与内容分享功能，未成年人可在监护人指导下安全使用。若你是未成年人的监护人，对本应用的数据处理有任何疑问，可通过第十条的方式联系我们。</p>
+  </section>
+
+  <section id="s8">
+    <h2><span class="num">八、</span>信息安全保护措施</h2>
+    <p>本应用采取以下措施保护你在本机创建的数据：应用数据存放于操作系统提供的私有沙箱，其他应用无法读取；应用不具备网络通信能力，不存在传输环节被截获的风险；数据随设备存储加密机制受保护；应用不在日志中输出你的记录内容。</p>
+    <p>同时需要提示的是，本机数据的安全还取决于设备本身的管理状态。在设备遗失、被他人借用或系统被攻破的情况下，本机数据可能被他人在设备上直接查看。建议你启用设备锁屏与存储加密，并在出借或转让设备前清除应用数据。</p>
+  </section>
+
+  <section id="s9">
+    <h2><span class="num">九、</span>本政策的更新</h2>
+    <p>本应用不具备联网与推送能力，无法向运行中的旧版本下发通知，因此政策更新随新版本发布：更新后的文本将在应用市场详情页与本政策页面同步公布，并在应用内可查阅。</p>
+    <p>如未来版本新增联网、账号、人工智能生成等能力，我们将在功能上线前修订本政策，逐项列明新增的信息种类、处理目的、保存期限、第三方组件与权限，并在新版本首次启动时以显著方式提示你阅读并确认；在你确认前，相关功能不会启用。若你不同意变更内容，可以停止使用并卸载本应用。</p>
+  </section>
+
+  <section id="s10">
+    <h2><span class="num">十、</span>联系我们</h2>
+    <p>如你对本政策内容、本应用的数据处理方式有任何疑问、意见或请求，可通过以下方式联系我们。</p>
+    <div class="contact">
+      <dl>
+        <dt>开发者</dt><dd>陈晓涛（个人开发者）</dd>
+        <dt>联系邮箱</dt><dd class="pending">待填写：开发者联系邮箱</dd>
+        <dt>答复时限</dt><dd>收到你的请求后 15 个工作日内答复</dd>
+      </dl>
+    </div>
+    <p style="margin-top:14px">我们建议你在邮件中说明所使用的应用版本、设备型号与具体问题，以便我们更快核实与答复。</p>
+  </section>
+
+  <section id="s11">
+    <h2><span class="num">附则　</span>生效、版本与制定依据</h2>
+    <p>本政策自 2026 年 11 月 15 日起生效，版本号为 V1.0，适用于 Coffee Master 单机离线版。本政策以中文简体文本为准。</p>
+    <p>本政策依据《中华人民共和国个人信息保护法》（2021 年 11 月 1 日施行）第十七条、第十九条、第四十四条至第四十七条，以及《中华人民共和国民法典》第一千零三十七条关于查阅、复制、更正与删除权利的规定制定。制定过程中参照了《网络数据安全管理条例》（国务院令第 790 号）第二十一条对个人信息处理规则应当包含内容的要求，列明处理者身份与联系方式、处理目的方式种类、保存期限以及权利行使途径；鉴于本应用不开展网络数据处理活动，该条例规定的多数义务对本应用不适用。</p>
+  </section>
+
+</main>
+
+<aside class="toc" aria-label="目录">
+  <p class="toc-title">本页目录</p>
+  <nav>
+    <a href="#s1">一、适用范围与政策定位</a>
+    <a href="#s2">二、个人信息的收集与使用</a>
+    <a href="#s3">三、存储、保存期限与删除</a>
+    <a href="#s4">四、设备权限与系统能力</a>
+    <a href="#s5">五、对外提供与第三方组件</a>
+    <a href="#s6">六、你的权利与实现方式</a>
+    <a href="#s7">七、未成年人保护</a>
+    <a href="#s8">八、信息安全保护措施</a>
+    <a href="#s9">九、本政策的更新</a>
+    <a href="#s10">十、联系我们</a>
+    <a href="#s11">附则、版本与制定依据</a>
+  </nav>
+</aside>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <span>Coffee Master 隐私政策 · V1.0 · 2026 年 11 月 15 日生效</span>
+    <span>本页面与安装包内随附的政策文本内容一致</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc nav a'));
+  if(!links.length || !('IntersectionObserver' in window)) return;
+  var sections = links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); }).filter(Boolean);
+  var visible = new Map();
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ visible.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0); });
+    var bestId = null, best = 0;
+    visible.forEach(function(ratio, id){ if(ratio > best){ best = ratio; bestId = id; } });
+    if(bestId){
+      links.forEach(function(a){
+        a.classList.toggle('active', a.getAttribute('href') === '#' + bestId);
+      });
+    }
+  }, { rootMargin: '-8% 0px -70% 0px', threshold: [0.05, 0.25, 0.5, 1] });
+  sections.forEach(function(s){ io.observe(s); });
+})();
+</script>
+</body>
+</html>
